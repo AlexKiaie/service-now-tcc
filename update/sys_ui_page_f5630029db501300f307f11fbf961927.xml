@@ -4,22 +4,24 @@
         <category>general</category>
         <client_script><![CDATA[var resourceId;
 var xhttp = new XMLHttpRequest();
+
+xhttp.open("GET", "/api/x_192597_tcc/get_resource_id/from_incident"+window.location.search, false, "admin", "1mNRKqgAnf9P");
 xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-		resourceId = JSON.parse(xhttp.responseText).value;
+		resourceId = JSON.parse(xhttp.responseText).result.value;
     }
 };
-xhttp.open("GET", "/api/x_192597_tcc/get_resource_id/from_incident", false, "admin", "1mNRKqgAnf9P");
 xhttp.send();
 
 xhttp = new XMLHttpRequest();
+xhttp.withCredentials = true;
+xhttp.open("GET", "https://cmp-test.cireson.com/platform/api/Cireson_ConfigurationManager_Portal_Core_Models_ConfigurationManager_CmResource?$filter=ResourceId%20eq%20" + resourceId + "&$select=Id", true, 'Automation.Admin1', '00GAb00ga!1');
 xhttp.onreadystatechange = function() {
 	if (this.readyState == 4 && this.status == 200) {
 		var id = JSON.parse(xhttp.responseText).value[0].Id;
 		document.getElementById("tcc-frame").setAttribute('src', 'https://cmp-test.cireson.com/platform/app/iframe/CmDevice/' + id);
 	}
 };
-xhttp.open("GET", "https://cmp-test.cireson.com/platform/api/Cireson_ConfigurationManager_Portal_Core_Models_ConfigurationManager_CmResource?$filter=ResourceId%20eq%20" + resourceId + "&$select=Id", true);
 xhttp.send();]]></client_script>
         <description/>
         <direct>false</direct>
@@ -34,13 +36,13 @@ xhttp.send();]]></client_script>
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-02-15 00:56:33</sys_created_on>
         <sys_id>f5630029db501300f307f11fbf961927</sys_id>
-        <sys_mod_count>3</sys_mod_count>
+        <sys_mod_count>9</sys_mod_count>
         <sys_name>TCC</sys_name>
         <sys_package display_value="TCC" source="x_192597_tcc">367db7d1db501300f307f11fbf961909</sys_package>
         <sys_policy/>
         <sys_scope display_value="TCC">367db7d1db501300f307f11fbf961909</sys_scope>
         <sys_update_name>sys_ui_page_f5630029db501300f307f11fbf961927</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-02-15 01:16:47</sys_updated_on>
+        <sys_updated_on>2018-02-15 02:20:19</sys_updated_on>
     </sys_ui_page>
 </record_update>
