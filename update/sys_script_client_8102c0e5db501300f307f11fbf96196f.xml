@@ -12,7 +12,7 @@
         <order/>
         <script><![CDATA[function onLoad() {
     var input_el = g_form.getElement('sys_display.incident.x_192597_tcc_computer');
-	input_el.setAttribute('onclick','new GlideDialogWindow("x_192597_tcc_TCC").render();')
+	//input_el.setAttribute('onclick','new GlideDialogWindow("x_192597_tcc_TCC").render();')
 }]]></script>
         <sys_class_name>sys_script_client</sys_class_name>
         <sys_created_by>admin</sys_created_by>
@@ -20,7 +20,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>8102c0e5db501300f307f11fbf96196f</sys_id>
-        <sys_mod_count>5</sys_mod_count>
+        <sys_mod_count>6</sys_mod_count>
         <sys_name>Computer Click Popup</sys_name>
         <sys_overrides/>
         <sys_package display_value="TCC" source="x_192597_tcc">367db7d1db501300f307f11fbf961909</sys_package>
@@ -28,7 +28,7 @@
         <sys_scope display_value="TCC">367db7d1db501300f307f11fbf961909</sys_scope>
         <sys_update_name>sys_script_client_8102c0e5db501300f307f11fbf96196f</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-02-15 01:28:56</sys_updated_on>
+        <sys_updated_on>2018-03-27 17:44:40</sys_updated_on>
         <table>incident</table>
         <type>onLoad</type>
         <ui_type>10</ui_type>

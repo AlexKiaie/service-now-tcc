@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_ui_action">
+    <sys_ui_action action="INSERT_OR_UPDATE">
+        <action_name>Manage Affected Computer</action_name>
+        <active>true</active>
+        <client>true</client>
+        <comments/>
+        <condition/>
+        <form_action>true</form_action>
+        <form_button>true</form_button>
+        <form_context_menu>false</form_context_menu>
+        <form_link>true</form_link>
+        <form_style/>
+        <hint/>
+        <list_action>false</list_action>
+        <list_banner_button>false</list_banner_button>
+        <list_button>false</list_button>
+        <list_choice>false</list_choice>
+        <list_context_menu>false</list_context_menu>
+        <list_link>false</list_link>
+        <list_save_with_form_button>false</list_save_with_form_button>
+        <list_style/>
+        <name>Manage Affected Computer</name>
+        <onclick>openManageWindow()</onclick>
+        <order>100</order>
+        <script><![CDATA[function openManageWindow() {
+	try {
+		var resourceId;
+		var computerId = g_form.getValue('x_192597_tcc_computer');
+ 		var frameUrl = 'https://cmp-test.cireson.com/platform/app/iframe/CmDevice/0';
+
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("GET", "/api/x_192597_tcc/get_resource_id/from_computer_id?sys_id=" + computerId, false, "admin", "nH7GNKwT3qwi");
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				resourceId = JSON.parse(xhttp.responseText).result.value;
+			}
+		};
+		xhttp.send();
+
+		xhttp = new XMLHttpRequest();
+		xhttp.withCredentials = true;
+		xhttp.open("GET", "https://cmp-test.cireson.com/platform/api/Cireson_ConfigurationManager_Portal_Core_Models_ConfigurationManager_CmResource?$filter=ResourceId%20eq%20" + resourceId + "&$select=Id", false, 'Automation.Admin1', '00GAb00ga!1');
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				var id = JSON.parse(xhttp.responseText).value[0].Id;
+				frameUrl = 'https://cmp-test.cireson.com/platform/app/iframe/CmDevice/' + id;
+			}
+		};
+		//xhttp.send();
+		
+		var gdw = new GlideDialogWindow('x_192597_tcc_TCC');
+        gdw.setTitle(frameUrl);
+        gdw.render();
+	}
+	finally{
+		return false;
+	}
+}]]></script>
+        <show_insert>false</show_insert>
+        <show_multiple_update>false</show_multiple_update>
+        <show_query>false</show_query>
+        <show_update>true</show_update>
+        <sys_class_name>sys_ui_action</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-03-28 18:35:00</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>94c0c3fedb4113002841771ebf9619f7</sys_id>
+        <sys_mod_count>38</sys_mod_count>
+        <sys_name>Manage Affected Computer</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="TCC" source="x_192597_tcc">367db7d1db501300f307f11fbf961909</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="TCC">367db7d1db501300f307f11fbf961909</sys_scope>
+        <sys_update_name>sys_ui_action_94c0c3fedb4113002841771ebf9619f7</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-03-28 21:16:42</sys_updated_on>
+        <table>incident</table>
+        <ui11_compatible>true</ui11_compatible>
+        <ui16_compatible>true</ui16_compatible>
+    </sys_ui_action>
+</record_update>

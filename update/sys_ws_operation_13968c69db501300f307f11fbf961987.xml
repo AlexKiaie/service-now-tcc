@@ -7,38 +7,27 @@
         <default_operation_uri/>
         <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
         <http_method>GET</http_method>
-        <name>From Incident</name>
+        <name>From Computer Id</name>
         <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 	response.setBody({});
 	
-	var incidentId = request.queryParams.sys_id;
-	
-	var igr = new GlideRecord('incident');
-	igr.addQuery('sys_id', incidentId);
-	igr.query();
-	
-	if(igr.next()) {
-		var computerId = igr.getValue('x_192597_tcc_computer');
+	var computerId = request.queryParams.sys_id;
 		
-		var cgr = new GlideRecord('cmdb_ci_computer');
-		cgr.addQuery('sys_id', computerId);
-		cgr.query();
-		
-		if(cgr.next()) {
-			response.setBody({value: cgr.getValue('correlation_id')});
-		}
-		else {
-			response.setError(new Error('Computer ' + computerId + ' not found'));
-		}
+	var cgr = new GlideRecord('cmdb_ci_computer');
+	cgr.addQuery('sys_id', computerId);
+	cgr.query();
+
+	if(cgr.next()) {
+		response.setBody({value: cgr.getValue('correlation_id')});
 	}
 	else {
-		response.setError(new Error('Incident ' + incidentId + ' not found'));
+		response.setError(new Error('Computer ' + computerId + ' not found'));
 	}
 })(request, response);]]></operation_script>
-        <operation_uri>/api/x_192597_tcc/get_resource_id/from_incident</operation_uri>
+        <operation_uri>/api/x_192597_tcc/get_resource_id/from_computer_id</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
         <produces_customized>false</produces_customized>
-        <relative_path>/from_incident</relative_path>
+        <relative_path>/from_computer_id</relative_path>
         <request_example/>
         <requires_acl_authorization>true</requires_acl_authorization>
         <requires_authentication>true</requires_authentication>
@@ -47,14 +36,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2018-02-15 01:11:39</sys_created_on>
         <sys_id>13968c69db501300f307f11fbf961987</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>From Incident</sys_name>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>From Computer Id</sys_name>
         <sys_package display_value="TCC" source="x_192597_tcc">367db7d1db501300f307f11fbf961909</sys_package>
         <sys_policy/>
         <sys_scope display_value="TCC">367db7d1db501300f307f11fbf961909</sys_scope>
         <sys_update_name>sys_ws_operation_13968c69db501300f307f11fbf961987</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-02-15 01:11:39</sys_updated_on>
+        <sys_updated_on>2018-03-28 19:41:18</sys_updated_on>
         <web_service_definition display_value="Get Resource Id">a756c869db501300f307f11fbf96199a</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
